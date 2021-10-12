@@ -61,8 +61,8 @@ html, body {
 
     </style>
     <script type="text/javascript">
-
-       var quiz = {
+var stringArray = new Array();
+var quiz = {
   // (A) PROPERTIES
   // (A1) QUESTIONS & ANSWERS
   // Q = QUESTION, O = OPTIONS, A = CORRECT ANSWER
@@ -159,7 +159,7 @@ html, body {
   init: function(){
     // (B1) WRAPPER
     quiz.hWrap = document.getElementById("quizWrap");
-
+    console.log(quiz.hWrap);
     // (B2) QUESTIONS SECTION
     quiz.hQn = document.createElement("div");
     quiz.hQn.id = "quizQn";
@@ -169,7 +169,7 @@ html, body {
     quiz.hAns = document.createElement("div");
     quiz.hAns.id = "quizAns";
     quiz.hWrap.appendChild(quiz.hAns);
-
+    console.log(quiz.hAns);
     // (B4) GO!
     quiz.draw();
   },
@@ -197,6 +197,7 @@ html, body {
   },
 
   // (D) OPTION SELECTED
+  
   select: function(){
     // (D1) DETACH ALL ONCLICK
     let all = quiz.hAns.getElementsByTagName("label");
@@ -206,6 +207,11 @@ html, body {
 
     // (D2) CHECK IF CORRECT
     let correct = this.dataset.idx == quiz.data[quiz.now].a;
+    let asd=quiz.data[quiz.now].o[this.dataset.idx];
+    stringArray[quiz.now]=asd;
+///quiz.data[quiz.now].o[this.dataset.idx]
+   /// console.log(quiz.data.o.this.dataset.idx);
+   // console.log(this.dataset.idx);
     if (correct) {
       quiz.score++;
       this.classList.add("correct");
@@ -218,10 +224,10 @@ html, body {
     setTimeout(function(){
       if (quiz.now < quiz.data.length) { quiz.draw(); }
       else {
-        quiz.hQn.innerHTML = `You have answered ${quiz.score} of ${quiz.data.length} correctly.`;
+        quiz.hQn.innerHTML = `You have  selected  ${stringArray[0]}   ,  ${stringArray[1]}   ,  ${stringArray[2]} ,  ${stringArray[3]} ${stringArray[4]} `;
         quiz.hAns.innerHTML = "";
       }
-    }, 1000);
+    }, 10);
   },
 
   // (E) RESTART QUIZ
@@ -232,7 +238,6 @@ html, body {
   }
 };
 window.addEventListener("load", quiz.init);
-
 
     </script>
   </head>
